@@ -1,46 +1,63 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Inter } from "next/font/google";
 import Link from "next/link";
-import { SessionProvider } from "@/app/components/SessionProvider";
-import UserButton from "@/app/components/UserButton";
+import { SessionProvider } from "next-auth/react";
 
+import { signIn, signOut, auth } from "@/auth";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import UserButton from "./components/UserButton";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ChatGPT App",
   description: "ChatGPT in NextJs",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+export default async function RootLayout({
+                                           children,
+                                         }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  if (session?.user) {
+    // TODO: Look into https://react.dev/reference/react/experimental_taintObjectReference
+    // filter out sensitive data before passing to client.
+    session.user = {
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+    };
+  }
+
   return (
-    <SessionProvider>
+    <SessionProvider basePath="/api/auth" session={session}>
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <header className="flex text-white font-bold bg-slate-500 text-xl pl-2 pr-1">
-            <div className="flex flex-grow items-center">
-              <Link href="/">ChatGPT</Link>
-              <Link href="/about" className="ml-5 font-light">About</Link>
+        <body className={`${inter.className}`}>
+        <header className="flex text-white bg-slate-500 text-xl pl-2 pr-2 drop-shadow-md mb-1">
+          <div className="flex flex-grow items-center">
+              <Link href="/">GPT Chat</Link>
+              <Link href="/about" className="ml-8 font-light">
+                About
+              </Link>
             </div>
-            <div><UserButton /></div>
+            <div>
+              <UserButton
+                onSignIn={async () => {
+                  "use server";
+                  await signIn();
+                }}
+                onSignOut={async () => {
+                  "use server";
+                  await signOut();
+                }}
+              />
+            </div>
           </header>
-          <div className="flex flex-col md:flex-row p-2">
-            <div className="flex-grow">{children}</div>
+          <div className="flex flex-col md:flex-row">
+            <div className="flex-grow p-2">{children}</div>
           </div>
         </body>
       </html>
