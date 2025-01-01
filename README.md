@@ -14,7 +14,7 @@ GITHUB_SECRET=
 OPENAI_API_KEY=
 ```
 
-First, run the development server:
+To run the development server:
 
 ```bash
 pnpm dev
