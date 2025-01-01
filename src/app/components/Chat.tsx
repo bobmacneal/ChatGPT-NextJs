@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ChatCompletionMessage } from '@/types/chat-completion-message'
+import { ChatCompletionMessage } from '../types/chat-completion-message'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { getCompletion } from "@/app/server-actions/getCompletion";
