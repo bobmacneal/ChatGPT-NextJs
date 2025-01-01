@@ -28,20 +28,20 @@ export default function Chat() {
       {messages.map((message:ChatCompletionMessage, i) => (
         <div
           key={i}
-          className={`mb-5 flex flex-col ${
-            message.role === "user" ? "items-end" : "items-start"
+          className={`mb-1 flex flex-col ${
+            message.role === "user" ? "items-start" : "items-start pl-3"
           }`}
         >
           <div
             className={`${
-              message.role === "user" ? "bg-blue-500" : "bg-gray-500 text-black"
-            } rounded-md py-2 px-8`}
+              message.role === "user" ? "bg-blue-50 border border-gray-200" : "bg-blue-400 text-white"
+            } rounded-md py-1 px-8`}
           >
             {message.content}
           </div>
         </div>
       ))}
-      <div className="flex">
+      <div className="flex mt-2">
         <Input
           className="flex-grow text-md"
           placeholder="ChatGPT Prompt?"
