@@ -38,7 +38,7 @@ export default async function RootLayout({
         <body className={`${inter.className}`}>
         <header className="flex text-white bg-slate-500 text-xl pl-2 pr-2 drop-shadow-md mb-1">
           <div className="flex flex-grow items-center">
-              <Link href="/">GPT Chat</Link>
+              <Link href="/">Home</Link>
               <Link href="/about" className="ml-8 font-light">
                 About
               </Link>
