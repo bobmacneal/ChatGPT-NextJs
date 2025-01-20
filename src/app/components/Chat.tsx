@@ -1,14 +1,15 @@
-"use client";
-import { useState } from "react";
-import { ChatCompletionMessage } from '../types/chat-completion-message'
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { getCompletion } from "@/app/server-actions/getCompletion";
+"use client"
+import { useState } from "react"
 
+import { getCompletion } from "@/app/server-actions/getCompletion"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
+import type { ChatCompletionMessage } from "../types/chat-completion-message"
 
 export default function Chat() {
-  const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
-  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<ChatCompletionMessage[]>([])
+  const [message, setMessage] = useState("")
 
   const onClick = async () => {
     // noinspection TypeScriptValidateTypes
@@ -18,14 +19,14 @@ export default function Chat() {
         role: "user",
         content: message,
       },
-    ]);
-    setMessage("");
-    setMessages(completions.messages);
-  };
+    ])
+    setMessage("")
+    setMessages(completions.messages)
+  }
 
   return (
-    <div className="flex flex-col">
-      {messages.map((message:ChatCompletionMessage, i) => (
+    <div className='flex flex-col'>
+      {messages.map((message: ChatCompletionMessage, i) => (
         <div
           key={i}
           className={`mb-1 flex flex-col ${
@@ -34,29 +35,31 @@ export default function Chat() {
         >
           <div
             className={`${
-              message.role === "user" ? "bg-blue-50 border border-gray-200" : "bg-blue-400 text-white"
-            } rounded-md py-1 px-8`}
+              message.role === "user"
+                ? "border border-gray-200 bg-blue-50"
+                : "bg-blue-400 text-white"
+            } rounded-md px-8 py-1`}
           >
             {message.content}
           </div>
         </div>
       ))}
-      <div className="flex mt-2">
+      <div className='mt-2 flex'>
         <Input
-          className="flex-grow text-md"
-          placeholder="ChatGPT Prompt?"
+          className='text-md grow'
+          placeholder='ChatGPT Prompt?'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyUp={(e) => {
             if (e.key === "Enter") {
-              onClick();
+              onClick()
             }
           }}
         />
-        <Button onClick={onClick} className="ml-3 text-md">
+        <Button onClick={onClick} className='text-md ml-3'>
           Send
         </Button>
       </div>
     </div>
-  );
+  )
 }

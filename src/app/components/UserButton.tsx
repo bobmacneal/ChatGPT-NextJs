@@ -1,28 +1,28 @@
-"use client";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+"use client"
+import { useSession } from "next-auth/react"
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-import { useSession } from "next-auth/react";
+} from "@/components/ui/dropdown-menu"
 
 function getFirstTwoCapitalLetters(str?: string | null) {
-  const match = (str || "").match(/[A-Z]/g);
-  return match ? match.slice(0, 2).join("") : "GT";
+  const match = (str || "").match(/[A-Z]/g)
+  return match ? match.slice(0, 2).join("") : "GT"
 }
 
 export default function UserButton({
-                                     onSignIn,
-                                     onSignOut,
-                                   }: {
-  onSignIn: () => Promise<void>;
-  onSignOut: () => Promise<void>;
+  onSignIn,
+  onSignOut,
+}: {
+  onSignIn: () => Promise<void>
+  onSignOut: () => Promise<void>
 }) {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession()
 
   const fetchAvatar = () => {
     if (session) {
@@ -36,11 +36,7 @@ export default function UserButton({
             </AvatarFallback>
           )
         } else {
-          return (
-            <AvatarFallback>
-              ?
-            </AvatarFallback>
-          )
+          return <AvatarFallback>?</AvatarFallback>
         }
       }
     }
@@ -52,14 +48,12 @@ export default function UserButton({
       {status === "authenticated" && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Avatar>
-              {fetchAvatar()}
-            </Avatar>
+            <Avatar>{fetchAvatar()}</Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem
               onClick={() => {
-                onSignOut();
+                onSignOut()
               }}
             >
               Sign Out
@@ -68,8 +62,10 @@ export default function UserButton({
         </DropdownMenu>
       )}
       {status === "unauthenticated" && (
-        <Button className="bg-slate-500" onClick={() => onSignIn()}>Sign in</Button>
+        <Button className='bg-slate-500' onClick={() => onSignIn()}>
+          Sign in
+        </Button>
       )}
     </div>
-  );
+  )
 }

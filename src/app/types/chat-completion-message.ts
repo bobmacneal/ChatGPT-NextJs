@@ -1,4 +1,4 @@
 export interface ChatCompletionMessage {
-  role: "user" | "assistant";
-  content: string;
+  role: "user" | "assistant"
+  content: string
 }

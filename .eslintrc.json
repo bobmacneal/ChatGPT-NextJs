@@ -1,0 +1,132 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "process": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": false,
+        "endOfLine": "auto",
+        "semi": false,
+        "trailingComma": "es5",
+        "printWidth": 80,
+        "tabWidth": 2,
+        "useTabs": false,
+        "bracketSpacing": true,
+        "arrowParens": "always",
+        "jsxSingleQuote": true,
+        "plugins": [
+          "prettier",
+          "prettier-plugin-tailwindcss",
+          "eslint-plugin-prettier"
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "tailwindcss": {
+      "callees": [
+        "classnames",
+        "clsx",
+        "ctl",
+        "cva",
+        "tv",
+        "cn"
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "unused-imports",
+        "tailwindcss",
+        "simple-import-sort",
+        "prettier"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:tailwindcss/recommended",
+        "next/core-web-vitals",
+        "plugin:prettier/recommended",
+        "prettier"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": false,
+            "endOfLine": "auto",
+            "semi": false,
+            "trailingComma": "es5"
+          }
+        ],
+        "tailwindcss/no-custom-classname": [
+          "off"
+        ],
+        "no-explicit-any": "off",
+        "no-new-require": "off",
+        "no-require-imports": "off",
+        "import/no-extraneous-dependencies": "warn",
+        "no-param-reassign": "off",
+        "consistent-return": "off",
+        "no-empty-pattern": "off",
+        "no-use-before-define": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "react/jsx-no-constructed-context-values": "off",
+        "import/extensions": "off",
+        "react/function-component-definition": "off",
+        "react/destructuring-assignment": "off",
+        "react/require-default-props": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/no-unstable-nested-components": "off",
+        "@typescript-eslint/comma-dangle": "off",
+        "@typescript-eslint/consistent-type-imports": "error",
+        "no-restricted-syntax": [
+          "error",
+          "ForInStatement",
+          "LabeledStatement",
+          "WithStatement"
+        ],
+        "import/prefer-default-export": "off",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "import/order": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "no-unused-vars": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+          }
+        ]
+      }
+    }
+  ]
+}
