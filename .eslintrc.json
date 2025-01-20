@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
   "env": {
     "browser": true,
     "node": true
@@ -34,23 +31,12 @@
   },
   "settings": {
     "tailwindcss": {
-      "callees": [
-        "classnames",
-        "clsx",
-        "ctl",
-        "cva",
-        "tv",
-        "cn"
-      ]
+      "callees": ["classnames", "clsx", "ctl", "cva", "tv", "cn"]
     }
   },
   "overrides": [
     {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.mts"
-      ],
+      "files": ["**/*.ts", "**/*.tsx", "**/*.mts"],
       "plugins": [
         "@typescript-eslint",
         "unused-imports",
@@ -80,9 +66,7 @@
             "trailingComma": "es5"
           }
         ],
-        "tailwindcss/no-custom-classname": [
-          "off"
-        ],
+        "tailwindcss/no-custom-classname": ["off"],
         "no-explicit-any": "off",
         "no-new-require": "off",
         "no-require-imports": "off",

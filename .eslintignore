@@ -1,2 +1,4 @@
 node_modules/
 tailwind.config.ts
+*.yaml
+tsconfig.json
