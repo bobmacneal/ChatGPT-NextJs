@@ -1,3 +1,1 @@
-export const whitelistedGithubUsers = [
-  'bobmacneal'
-]
+export const whitelistedGithubUsers = ["bobmacneal"]
