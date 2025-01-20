@@ -7,11 +7,15 @@ import { whitelistedGithubUsers } from "./whitelisted-github-users"
 const authOptions: NextAuthConfig = {
   callbacks: {
     async signIn({ profile }) {
-      if (whitelistedGithubUsers.includes(profile.login.toString())) {
+      if (
+        profile &&
+        profile?.login &&
+        whitelistedGithubUsers.includes(profile.login.toString())
+      ) {
         console.log(`${profile.login} logged in`)
         return profile.login === "bobmacneal"
       }
-      return profile.login === null
+      return profile?.login === null
     },
   },
   providers: [
